@@ -20,7 +20,7 @@ var MatSelectSearchComponent = /** @class */ (function () {
         this.changeDetectorRef = changeDetectorRef;
         this.placeholderLabel = 'Pesquisar';
         this.noEntriesFoundLabel = 'Nenhum item encontrado';
-        this.clearSearchInput = true;
+        this.clearSearchInput = false;
         this.onChange = function (_) { };
         this.onTouched = function (_) { };
         this.overlayClassSet = false;
@@ -59,7 +59,7 @@ var MatSelectSearchComponent = /** @class */ (function () {
                 _this._focus();
             }
             else {
-                _this._reset();
+                _this._reset(false, _this.clearSearchInput);
             }
         });
         this.matSelect.openedChange
@@ -139,15 +139,10 @@ var MatSelectSearchComponent = /** @class */ (function () {
         this.searchSelectInput.nativeElement.focus();
         panel.scrollTop = scrollTop;
     };
-    MatSelectSearchComponent.prototype._reset = function (focus, noClear) {
-        if (!this.searchSelectInput) {
-            return;
-        }
-        if (this.clearSearchInput) {
-            this.searchSelectInput.nativeElement.value = '';
-            if (!noClear) {
-                this.onInputChange('');
-            }
+    MatSelectSearchComponent.prototype._reset = function (focus, clearInput) {
+        this.searchSelectInput.nativeElement.value = '';
+        if (clearInput) {
+            this.onInputChange('');
         }
         if (focus) {
             this._focus();

@@ -130,7 +130,7 @@ class MatSelectSearchComponent {
          * Whether or not the search field should be cleared after the dropdown menu is closed.
          * Useful for server-side filtering. See [#3](https://github.com/bithost-gmbh/ngx-mat-select-search/issues/3)
          */
-        this.clearSearchInput = true;
+        this.clearSearchInput = false;
         this.onChange = (_) => { };
         this.onTouched = (_) => { };
         /**
@@ -184,7 +184,7 @@ class MatSelectSearchComponent {
             }
             else {
                 // clear it when closing
-                this._reset();
+                this._reset(false, this.clearSearchInput);
             }
         });
         // set the first item active after the options changed
@@ -310,18 +310,13 @@ class MatSelectSearchComponent {
     /**
      * Resets the current search value
      * @param {?=} focus whether to focus after resetting
-     * @param {?=} noClear
+     * @param {?=} clearInput
      * @return {?}
      */
-    _reset(focus, noClear) {
-        if (!this.searchSelectInput) {
-            return;
-        }
-        if (this.clearSearchInput) {
-            this.searchSelectInput.nativeElement.value = '';
-            if (!noClear) {
-                this.onInputChange('');
-            }
+    _reset(focus, clearInput) {
+        this.searchSelectInput.nativeElement.value = '';
+        if (clearInput) {
+            this.onInputChange('');
         }
         if (focus) {
             this._focus();

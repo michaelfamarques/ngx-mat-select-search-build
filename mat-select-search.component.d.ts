@@ -140,7 +140,7 @@ export declare class MatSelectSearchComponent implements OnInit, OnDestroy, Afte
      * Resets the current search value
      * @param focus whether to focus after resetting
      */
-    _reset(focus?: boolean, noClear?: boolean): void;
+    _reset(focus?: boolean, clearInput?: boolean): void;
     /**
      * Sets the overlay class  to correct offsetY
      * so that the selected option is at the position of the select box when opening
